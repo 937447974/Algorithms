@@ -67,7 +67,7 @@ class HeapSort: NSObject {
         return max
     }
     
-    // MARK: - 插入一个元素
+    // MARK: 插入一个元素
     /// 插入一个元素
     ///
     /// - parameter x : 要插入的元素
@@ -76,19 +76,20 @@ class HeapSort: NSObject {
     func insert(x:Int) {
         self.list.append(x)
         self.buildMaxHeap()
+        
     }
     
-    // MARK: - 父节点
+    // MARK: - 父结点
     private func parent(i:Int) -> Int {
         return (i + 1) / 2 - 1
     }
     
-    // MARK: 左节点
+    // MARK: 左结点
     private func left(i:Int) -> Int {
         return 2 * i + 1
     }
     
-    // MARK: 右节点
+    // MARK: 右结点
     private func right(i:Int) -> Int {
         return 2 * i + 2
     }
