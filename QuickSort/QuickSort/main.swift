@@ -46,10 +46,3 @@ date = NSDate()
 quickSort.list = source
 quickSort.threadQuickSort()
 print("多线程快速排序耗时:\(-date.timeIntervalSinceNow)")
-
-
-
-
-
-
-

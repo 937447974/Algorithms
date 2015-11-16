@@ -75,7 +75,8 @@ class QuickSort: NSObject {
     private func radomPartition(first:Int, end:Int) ->Int {
         // 随机一个数放到尾部，主要防止遇到最坏排序情况，即数组为倒序
         // 获取first-end的随机数
-        let random = arc4random_uniform(UInt32(end-first+1))
+        let random = arc4random_uniform(UInt32(end-first))
+        // 或 random = Int(arc4random()) % (end-first)
         let index = Int(random) + first
         self.exchange(index, end);
         return self.partition(first, end: end)
