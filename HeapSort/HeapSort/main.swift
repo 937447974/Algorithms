@@ -12,13 +12,21 @@
 import Foundation
 
 var list:[Int] = []
-for(var i = 0; i < 5; i++) {
+for(var i = 0; i < 10; i+=2) {
     list.append(i)
 }
-for(var i = -2; i < 6; i++) {
+for(var i = 9; i > 0; i-=2) {
     list.append(i)
 }
 let heap = HeapSort(list: list)
-print("最大堆排序:\(heap.maxSort())")
-print("最小堆排序:\(heap.miniSort())")
+
+print("堆排序:\(heap.heapSort())")
+
+print("堆最大值:\(heap.maxiMum())")
+
+print("提取堆最大值并删除:\(heap.extractMax())")
+print("堆排序:\(heap.heapSort())")
+
+heap.insert(2)// 插入一个元素
+print("堆排序:\(heap.heapSort())")
 

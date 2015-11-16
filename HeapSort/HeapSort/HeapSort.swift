@@ -15,13 +15,67 @@ import Foundation
 class HeapSort: NSObject {
     
     /// 数组
-    private var list:[Int] = []
+    private var list:Array<Int> = []
     /// 堆长度
     private var heapSize = 0
     
     //MARK: 初始化
     init(list:[Int]) {
         self.list = list
+    }
+    
+    // MARK: - 堆排序
+    /// 堆排序
+    ///
+    /// - returns: [Int]
+    func heapSort() -> [Int]{
+        // 排序结果为从小到大
+        self.buildMaxHeap()
+        let heap = self.list // 存储最大堆
+        for(var i = self.heapSize - 1; i > 0; i--) {
+            // 最后一个位置保存堆最大的数
+            self.exchange(i, change: 0)
+            self.heapSize--
+            self.maxHeapify(0)
+        }
+        let heapSort = self.list
+        self.list = heap // 恢复最大堆
+        return heapSort
+    }
+    
+    // MARK: 返回最大值
+    /// 返回最大值
+    ///
+    /// - returns: Int?
+    func maxiMum() -> Int? {
+        return self.list.first
+    }
+    
+    // MARK: - 返回最大值的同时删除最大值
+    /// 返回最大值的同时删除最大值
+    ///
+    /// - returns: void
+    func extractMax() -> Int? {
+        let max = self.list.first
+        if max != nil {
+            // 删除最大值，后重新维护最大堆
+            self.list[0] = self.list.last!
+            self.list.removeLast()
+            self.heapSize = self.list.count
+            self.maxHeapify(0)
+        }
+        return max
+    }
+    
+    // MARK: - 插入一个元素
+    /// 插入一个元素
+    ///
+    /// - parameter x : 要插入的元素
+    ///
+    /// - returns: void
+    func insert(x:Int) {
+        self.list.append(x)
+        self.buildMaxHeap()
     }
     
     // MARK: - 父节点
@@ -34,39 +88,23 @@ class HeapSort: NSObject {
         return 2 * i + 1
     }
     
-    // MARK: 右边节点
+    // MARK: 右节点
     private func right(i:Int) -> Int {
         return 2 * i + 2
     }
     
-    // MARK: 交换节点
-    private func exchange(i:Int, change:Int) {
-        let tempI:Int = self.list[i]
-        self.list[i] = self.list[change]
-        self.list[change] = tempI
-    }
-    
-    //MARK: - 最大堆排序
-    func maxSort() -> [Int]{
-        self.buildMaxHeap()
-        for(var i = self.heapSize - 1; i > 0; i--) {
-            self.exchange(i, change: 0)
-            self.heapSize--
-            self.maxBase(0)
-        }
-        return self.list
-    }
-    
-    // MARK: 建立最大堆
+    // MARK: - 建立最大堆
     private func buildMaxHeap() {
+        // 时间复杂度O(n)
         self.heapSize = self.list.count
         for(var i = self.list.count / 2; i >= 0; i--) {
-            self.maxBase(i)
+            self.maxHeapify(i)
         }
     }
     
-    // MARK: 最大堆的基础算法
-    private func maxBase(i:Int) {
+    // MARK: 维护最大堆
+    private func maxHeapify(i:Int) {
+        // 最大堆的基础算法，使用“逐级下降”原理，时间复杂度O(h树高)
         let l = self.left(i)
         let r = self.right(i)
         var largest = i
@@ -80,46 +118,15 @@ class HeapSort: NSObject {
         // 是否需要改变
         if largest != i {
             self.exchange(i, change: largest)
-            self.maxBase(largest)
+            self.maxHeapify(largest)
         }
     }
     
-    //MARK: - 最小堆排序
-    func miniSort() -> [Int]{
-        self.buildMiniHeap()
-        for(var i = self.heapSize - 1; i > 0; i--) {
-            self.exchange(i, change: 0)
-            self.heapSize--
-            self.miniBase(0)
-        }
-        return self.list
-    }
-    
-    // MARK: 建立最小堆
-    private func buildMiniHeap() {
-        self.heapSize = self.list.count
-        for(var i = self.list.count / 2; i >= 0; i--) {
-            self.miniBase(i)
-        }
-    }
-    
-    // MARK: 最小堆的基础算法
-    private func miniBase(i:Int) {
-        let l = self.left(i)
-        let r = self.right(i)
-        var largest = i
-        // 找出最小的那个数
-        if l < self.heapSize && self.list[l] < self.list[largest] {
-            largest = l
-        }
-        if r < self.heapSize && self.list[r] < self.list[largest] {
-            largest = r
-        }
-        // 是否需要改变
-        if largest != i {
-            self.exchange(i, change: largest)
-            self.miniBase(largest)
-        }
+    // MARK: 交换节点
+    private func exchange(i:Int, change:Int) {
+        let tempI:Int = self.list[i]
+        self.list[i] = self.list[change]
+        self.list[change] = tempI
     }
     
 }
