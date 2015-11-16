@@ -1,5 +1,3 @@
-# Algorithms
-
 CSDN博客地址:http://blog.csdn.net/y550918116j
 
 GitHub博客地址:https://github.com/937447974/Blog
@@ -12,6 +10,10 @@ QQ：937447974
 
 本模块主要是本人对于算法的一些研究。如果你对我的项目感兴趣，并想持续获得本人最新的项目源文件，欢迎点击右上角的Fork按钮。
 
-## HeapSort
+#1 HeapSort
 
-堆排序。
+堆排序
+
+#2 QuickSort
+
+快速排序
