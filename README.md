@@ -17,3 +17,7 @@ QQ：937447974
 #2 QuickSort
 
 快速排序
+
+#3 BasicDataStruct
+
+介绍了几种基本的结构：栈、队列和链表
