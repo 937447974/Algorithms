@@ -2,6 +2,9 @@
 //  YJStack.swift
 //  BasicDataStruct
 //
+//  CSDN:http://blog.csdn.net/y550918116j
+//  GitHub:https://github.com/937447974/Blog
+//
 //  Created by yangjun on 15/11/17.
 //  Copyright © 2015年 阳君. All rights reserved.
 //
@@ -9,12 +12,14 @@
 import Foundation
 
 enum YJStackError: ErrorType {
-    case Overflow  ///< 上溢
-    case Underflow ///< 下溢
+    /// 上溢
+    case Overflow
+    /// 下溢
+    case Underflow
 }
 
 /// 栈
-class YJStack: NSObject {
+class YJStack {
 
     /// 栈,10个位置
     private var list = [Int](count: 10, repeatedValue: 0)

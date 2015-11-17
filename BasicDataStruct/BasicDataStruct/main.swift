@@ -17,9 +17,34 @@ do {
     print(strack.empty())
     try strack.push(1)
     try print(strack.pop())
-    try print(strack.pop()) // 下溢
+//    try print(strack.pop()) // 下溢
+} catch YJStackError.Overflow {
+    print("上溢")
 } catch YJStackError.Underflow {
     print("下溢")
 }
+
+// 队列
+do {
+    let queue = YJQueue()
+    print(queue.empty())
+    for var item in 1..<10 {
+        try queue.enqueue(item)
+    }
+    // 出队
+    try queue.dequeue()
+    
+} catch YJQueueError.Overflow {
+    print("上溢")
+} catch YJQueueError.Underflow {
+    print("下溢")
+}
+
+
+// 链表
+let list = YJList()
+list.insert("阳君")
+let itme = list.search("阳君")
+list.delete("阳君")
 
 

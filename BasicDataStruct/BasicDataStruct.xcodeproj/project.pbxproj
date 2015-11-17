@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D4367B7E1BFB12CA0047DC23 /* YJStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4367B7D1BFB12CA0047DC23 /* YJStack.swift */; };
+		D4367B801BFB27430047DC23 /* YJQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4367B7F1BFB27430047DC23 /* YJQueue.swift */; };
+		D4367B821BFB54930047DC23 /* YJList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4367B811BFB54930047DC23 /* YJList.swift */; };
+		D4367B841BFB58FD0047DC23 /* YJListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4367B831BFB58FD0047DC23 /* YJListItem.swift */; };
 		D46905561BFB0EDF004A20B0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46905551BFB0EDF004A20B0 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		D4367B7D1BFB12CA0047DC23 /* YJStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YJStack.swift; sourceTree = "<group>"; };
+		D4367B7F1BFB27430047DC23 /* YJQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YJQueue.swift; sourceTree = "<group>"; };
+		D4367B811BFB54930047DC23 /* YJList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YJList.swift; sourceTree = "<group>"; };
+		D4367B831BFB58FD0047DC23 /* YJListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YJListItem.swift; sourceTree = "<group>"; };
 		D46905521BFB0EDF004A20B0 /* BasicDataStruct */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BasicDataStruct; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46905551BFB0EDF004A20B0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +67,9 @@
 			children = (
 				D46905551BFB0EDF004A20B0 /* main.swift */,
 				D4367B7D1BFB12CA0047DC23 /* YJStack.swift */,
+				D4367B7F1BFB27430047DC23 /* YJQueue.swift */,
+				D4367B811BFB54930047DC23 /* YJList.swift */,
+				D4367B831BFB58FD0047DC23 /* YJListItem.swift */,
 			);
 			path = BasicDataStruct;
 			sourceTree = "<group>";
@@ -123,7 +132,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4367B841BFB58FD0047DC23 /* YJListItem.swift in Sources */,
 				D4367B7E1BFB12CA0047DC23 /* YJStack.swift in Sources */,
+				D4367B801BFB27430047DC23 /* YJQueue.swift in Sources */,
+				D4367B821BFB54930047DC23 /* YJList.swift in Sources */,
 				D46905561BFB0EDF004A20B0 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
