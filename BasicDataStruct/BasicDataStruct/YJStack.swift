@@ -22,6 +22,9 @@ class YJStack: NSObject {
     private var top = -1
     
     // MARK: 栈是否为空
+    /// 栈是否为空
+    ///
+    /// - returns: Bool
     func empty() -> Bool {
         return self.top == -1
     }
