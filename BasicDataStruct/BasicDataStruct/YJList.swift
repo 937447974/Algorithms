@@ -47,7 +47,7 @@ class YJList {
     func insert(key:String) {
         let item = YJListItem()
         item.key = key
-        itme.next = self.lNil.next
+        item.next = self.lNil.next
         self.lNil.next.prev = item
         self.lNil.next = item
         item.prev = self.lNil
