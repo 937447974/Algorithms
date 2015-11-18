@@ -15,13 +15,13 @@ import Foundation
 class YJList {
     
     /// 哨兵
-    private var lNil = YJListItem()
+    private var sentinel = YJListItem()
     
     // MARK: - 初始化
     init() {
         // 自循环
-        self.lNil.next = self.lNil
-        self.lNil.prev = self.lNil
+        self.sentinel.next = self.sentinel
+        self.sentinel.prev = self.sentinel
     }
     
     // MARK: 查找YJListItem
@@ -31,7 +31,7 @@ class YJList {
     ///
     /// - returns: key
     func search(key:String) -> YJListItem {
-        var x = self.lNil.next
+        var x = self.sentinel.next
         while x.key != nil && x.key != key {
             x = x.next
         }
@@ -47,10 +47,10 @@ class YJList {
     func insert(key:String) {
         let item = YJListItem()
         item.key = key
-        item.next = self.lNil.next
-        self.lNil.next.prev = item
-        self.lNil.next = item
-        item.prev = self.lNil
+        item.next = self.sentinel.next
+        self.sentinel.next.prev = item
+        self.sentinel.next = item
+        item.prev = self.sentinel
     }
     
     // MARK: 删除
