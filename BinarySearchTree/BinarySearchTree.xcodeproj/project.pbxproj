@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D4F26C701BFC3BE100804464 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F26C6F1BFC3BE100804464 /* main.swift */; };
+		D4F26C771BFC436100804464 /* YJBinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F26C761BFC436100804464 /* YJBinarySearchTree.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		D4F26C6C1BFC3BE100804464 /* BinarySearchTree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BinarySearchTree; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F26C6F1BFC3BE100804464 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D4F26C761BFC436100804464 /* YJBinarySearchTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YJBinarySearchTree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				D4F26C6F1BFC3BE100804464 /* main.swift */,
+				D4F26C761BFC436100804464 /* YJBinarySearchTree.swift */,
 			);
 			path = BinarySearchTree;
 			sourceTree = "<group>";
@@ -88,6 +91,7 @@
 		D4F26C641BFC3BE100804464 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = YJ;
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "阳君";
@@ -120,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F26C701BFC3BE100804464 /* main.swift in Sources */,
+				D4F26C771BFC436100804464 /* YJBinarySearchTree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
