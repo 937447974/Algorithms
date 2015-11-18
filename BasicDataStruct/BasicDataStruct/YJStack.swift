@@ -39,10 +39,10 @@ class YJStack {
     ///
     /// - returns: Int throws YJStackError
     func push(x:Int) throws {
-        self.top++
-        guard self.top != self.list.count else {
+        guard self.top + 1 != self.list.count else {
             throw YJStackError.Overflow // 上溢
         }
+        self.top++
         list[self.top] = x
     }
     

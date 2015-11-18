@@ -30,8 +30,8 @@ class YJQueue {
     /// 队列中存在的个数
     private var count = 0
     
-    // MARK: 栈是否为空
-    /// 栈是否为空
+    // MARK: 队列是否为空
+    /// 队列是否为空
     ///
     /// - returns: Bool
     func empty() -> Bool {

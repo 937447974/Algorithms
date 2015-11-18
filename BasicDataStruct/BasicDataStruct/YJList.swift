@@ -60,9 +60,12 @@ class YJList {
     ///
     /// - returns: void
     func delete(key:String) {
+        // 查找元素
         let item = self.search(key)
-        item.prev.next = item.next
-        item.next.prev = item.prev
+        if item.key != nil { // 存在则删除
+            item.prev.next = item.next
+            item.next.prev = item.prev
+        }
     }
     
 }
