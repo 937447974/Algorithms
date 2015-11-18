@@ -19,7 +19,7 @@ class YJList {
     
     // MARK: - 初始化
     init() {
-        // 自循环
+        // 哨兵自循环
         self.sentinel.next = self.sentinel
         self.sentinel.prev = self.sentinel
     }
