@@ -11,5 +11,21 @@
 
 import Foundation
 
-print("Hello, World!")
+let tree = YJBinarySearchTree()
 
+// 插入
+for n in 0...20 {
+    tree.insert(Int(arc4random())%20)
+}
+
+print(tree.maximum()?.key)
+print(tree.minimum()?.key)
+tree.inorderWalk()
+
+print("============")
+
+// 删除
+for n in 0...10 {
+    tree.insert(Int(arc4random())%20)
+}
+tree.inorderWalk()

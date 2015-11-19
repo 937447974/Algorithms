@@ -12,13 +12,15 @@
 import Cocoa
 
 /// 树结点
-class YJTreeItem {
+class YJTreeItem: NSObject {
 
     /// 关键字
-    var key:Int!
+    var key: Int!
+    /// 父结点
+    var parentItem: YJTreeItem?
     /// 左子结点
-    var left:YJTreeItem?
+    var leftItem: YJTreeItem?
     /// 右子结点
-    var right:YJTreeItem?
+    var rightItem: YJTreeItem?
     
 }
