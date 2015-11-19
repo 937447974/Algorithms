@@ -18,9 +18,9 @@ class YJTreeItem: NSObject {
     var key: Int!
     /// 父结点
     var parentItem: YJTreeItem?
-    /// 左子结点
+    /// 左孩子结点
     var leftItem: YJTreeItem?
-    /// 右子结点
+    /// 右孩子结点
     var rightItem: YJTreeItem?
     
 }

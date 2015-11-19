@@ -26,6 +26,6 @@ print("============")
 
 // 删除
 for n in 0...10 {
-    tree.insert(Int(arc4random())%20)
+    tree.delete(Int(arc4random())%20)
 }
 tree.inorderWalk()

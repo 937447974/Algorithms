@@ -42,9 +42,9 @@ class YJBinarySearchTree {
     func search(key: Int) -> YJTreeItem? {
         var item = self.rootItem
         while item != nil && key != item?.key {
-            if item?.key > key { // 当前结点大于key时搜索左子结点
+            if item?.key > key { // 当前结点大于key时搜索左孩子
                 item = item?.leftItem
-            } else { // 否则进入右子结点
+            } else { // 否则进入右孩子
                 item = item?.rightItem
             }
         }
@@ -132,16 +132,22 @@ class YJBinarySearchTree {
             return
         }
         if z!.leftItem == nil {
+            //1 如果z没有左孩子，则用其右孩子代替z
             self.transplant(z!, v: z!.rightItem)
         } else if z?.rightItem == nil {
+            //2 如果z没有右孩子，则用其左孩子代替z
             self.transplant(z!, v: z!.leftItem)
         } else {
+            //3 z即有左孩子又有右孩子，则用z的后继y替换它
             let y = self.minimum(z?.rightItem)
+            //4 如果y是z的右孩子,用y替换z，并仅留下y的右孩子
             if y!.parentItem != z {
+                //5 否则，y位于z的右子树中但不是z的右孩子，在这种情况先用y的右孩子替换y。再用y替换z。
                 self.transplant(y!, v: y?.rightItem)
                 y?.rightItem = z?.rightItem
                 y?.rightItem?.parentItem = y
             }
+            // y替换z
             self.transplant(z!, v: y)
             y?.leftItem = z?.leftItem
             y?.leftItem?.parentItem = y
@@ -150,6 +156,7 @@ class YJBinarySearchTree {
     
     // MARK: v替换u的位置
     private func transplant(u: YJTreeItem, v: YJTreeItem?) {
+        // 设置u的父结点的子结点为v
         if u.parentItem == nil {
             self.rootItem = v
         } else if u == u.parentItem?.leftItem {
@@ -157,6 +164,7 @@ class YJBinarySearchTree {
         } else {
             u.parentItem!.rightItem = v
         }
+        // 设置v的父结点为u的父结点
         if v != nil {
             v!.parentItem = u.parentItem
         }
