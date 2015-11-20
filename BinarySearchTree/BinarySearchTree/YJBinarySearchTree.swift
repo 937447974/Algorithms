@@ -27,6 +27,7 @@ class YJBinarySearchTree {
     
     private func inorderWalk(item: YJTreeItem?) {
         if item != nil {
+            // 中序遍历
             self.inorderWalk(item!.leftItem)
             print(item!.key)
             self.inorderWalk(item!.rightItem)
@@ -67,7 +68,7 @@ class YJBinarySearchTree {
         return item
     }
     
-    // MARK: - 获取最大结点
+    // MARK: 获取最大结点
     /// 获取最大结点
     ///
     /// - returns: YJTreeItem
@@ -81,6 +82,46 @@ class YJBinarySearchTree {
             item = item?.rightItem
         }
         return item
+    }
+    
+    // MARK: - 查找x的前驱
+    /// 查找x的前驱
+    ///
+    /// - parameter x : 要查找的结点
+    ///
+    /// - returns: YJTreeItem
+    func predecessor(var x:YJTreeItem?) -> YJTreeItem? {
+        // 1.有左子树，则后继为x左子树中的最右结点
+        if x?.leftItem != nil {
+            return self.maximum(x!.leftItem)
+        }
+        // 2.无左子结点，则后继为其有右结点的根结点
+        var y = x?.parentItem
+        while y != nil && x == y?.leftItem {
+            x = y
+            y = y?.parentItem
+        }
+        return y
+    }
+    
+    // MARK: 查找x的后继
+    /// 查找x的后继
+    ///
+    /// - parameter x : 要查找的结点
+    ///
+    /// - returns: YJTreeItem
+    func successor(var x:YJTreeItem?) -> YJTreeItem? {
+        // 1.有右子树，则后继为x右子树中的最左结点
+        if x?.rightItem != nil {
+            return self.minimum(x!.rightItem)
+        }
+        // 2.无右子结点，则后继为其有左结点的根结点
+        var y = x?.parentItem
+        while y != nil && x == y?.rightItem {
+            x = y
+            y = y?.parentItem
+        }
+        return y
     }
     
     // MARK: - 插入key
@@ -170,7 +211,4 @@ class YJBinarySearchTree {
         }
     }
     
-    
-    
-   
 }

@@ -24,6 +24,14 @@ tree.inorderWalk()
 
 print("============")
 
+// 查找
+let x = tree.search(10)
+print(x?.key)
+print(tree.predecessor(x)?.key)
+print(tree.successor(x)?.key)
+
+print("============")
+
 // 删除
 for n in 0...10 {
     tree.delete(Int(arc4random())%20)
