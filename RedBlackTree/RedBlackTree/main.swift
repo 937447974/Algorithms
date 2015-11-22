@@ -13,3 +13,12 @@ import Foundation
 
 print("Hello, World!")
 
+let tree = YJRedBlackTree()
+// 插入
+for var i in 1 ..< 10 {
+    let node = YJRedBlackNode(key: 10-i)
+    tree.insert(node)
+}
+
+tree.inorderWalk()
+
