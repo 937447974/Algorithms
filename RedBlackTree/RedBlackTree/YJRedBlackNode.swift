@@ -22,14 +22,14 @@ class YJRedBlackNode: NSObject {
 
     /// 值
     var key: Int!
-    /// 颜色,默认.Red
-    var color: YJNodeColor?
+    /// 颜色,默认YJNodeColor.Black
+    var color: YJNodeColor = YJNodeColor.Black
     /// 父结点
     var parent: YJRedBlackNode?
     /// 左结点
-    var left: YJRedBlackNode?
+    var left: YJRedBlackNode!
     /// 右结点
-    var right: YJRedBlackNode?
+    var right: YJRedBlackNode!
     
     // MARK: - 初始化
     /// 初始化
