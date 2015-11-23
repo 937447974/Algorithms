@@ -14,7 +14,7 @@ import Foundation
 let tree = YJRedBlackTree()
 // 测试数据
 var list = Array<YJRedBlackNode>()
-let count = 100000
+let count = 1000000
 for var i in 1 ..< count {
     let node = YJRedBlackNode(key: Int(arc4random())%count)
 //    let node = YJRedBlackNode(key: i)

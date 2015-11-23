@@ -160,12 +160,12 @@ class YJRedBlackTree {
                 } else if z == z.parent!.right { // case 2
                     z = z.parent!
                     self.leftRotate(z)
-                }
-                // case 3
-                z.parent?.color = YJNodeColor.Black
-                if z.parent?.parent != nil { // 祖父结点存在
-                    z.parent!.parent!.color = YJNodeColor.Red
-                    self.rightRotate(z.parent!.parent!)
+                } else { // case 3
+                    z.parent?.color = YJNodeColor.Black
+                    if z.parent?.parent != nil { // 祖父结点存在
+                        z.parent!.parent!.color = YJNodeColor.Red
+                        self.rightRotate(z.parent!.parent!)
+                    }
                 }
             } else if z.parent == z.parent!.parent?.right { // z.parent在z的祖父结点的右边
                 let y = z.parent!.parent!.left
@@ -177,12 +177,12 @@ class YJRedBlackTree {
                 } else if z == z.parent!.left { // case 2
                     z = z.parent!
                     self.rightRotate(z)
-                }
-                // case 3
-                z.parent?.color = YJNodeColor.Black
-                if z.parent?.parent != nil { // 祖父结点存在
-                    z.parent!.parent!.color = YJNodeColor.Red
-                    self.leftRotate(z.parent!.parent!)
+                } else { // case 3
+                    z.parent?.color = YJNodeColor.Black
+                    if z.parent?.parent != nil { // 祖父结点存在
+                        z.parent!.parent!.color = YJNodeColor.Red
+                        self.leftRotate(z.parent!.parent!)
+                    }
                 }
             }
         }
@@ -252,14 +252,13 @@ class YJRedBlackTree {
         return node
     }
     
-    
     // MARK: 删除后保持红黑性质
     private func deleteFixup(var x: YJRedBlackNode) {
         /* 4种情况，w = x的兄弟结点
         1. w是红色的
         2. w是黑色的，而且w的两个子结点都是黑色的
         3. w是黑色的，w的左孩子是红色的，w的右孩子是黑色的
-        4. w是黑色的，切w的右孩子是红色的
+        4. w是黑色的，且w的右孩子是红色的
         */
         while x != self.root && x.color == YJNodeColor.Black {
             if x == x.parent!.left { // x是左孩子
@@ -279,13 +278,13 @@ class YJRedBlackTree {
                         w.color = YJNodeColor.Red
                         self.rightRotate(w)
                         w = x.parent!.right!
+                    } else { // case 4
+                        w.color = x.parent!.color
+                        x.parent?.color = YJNodeColor.Black
+                        w.right?.color = YJNodeColor.Black
+                        self.leftRotate(x.parent!)
+                        x = self.root!
                     }
-                    // case 4
-                    w.color = x.parent!.color
-                    x.parent?.color = YJNodeColor.Black
-                    w.right?.color = YJNodeColor.Black
-                    self.leftRotate(x.parent!)
-                    x = self.root!
                 }
             } else { // x是右孩子
                 var w = x.parent!.left!
@@ -304,13 +303,14 @@ class YJRedBlackTree {
                         w.color = YJNodeColor.Red
                         self.leftRotate(w)
                         w = x.parent!.left!
+                    } else {
+                        // case 4
+                        w.color = x.parent!.color
+                        x.parent?.color = YJNodeColor.Black
+                        w.left?.color = YJNodeColor.Black
+                        self.rightRotate(x.parent!)
+                        x = self.root!
                     }
-                    // case 4
-                    w.color = x.parent!.color
-                    x.parent?.color = YJNodeColor.Black
-                    w.left?.color = YJNodeColor.Black
-                    self.rightRotate(x.parent!)
-                    x = self.root!
                 }
             }
         }
