@@ -11,5 +11,10 @@
 
 import Foundation
 
-print("Hello, World!")
+let tree: YJBTree = YJBTree(t: 3)
 
+print("插入======")
+for i in 0...20 {
+    tree.insert(i)
+    print("总数：\(tree.count), \(tree.sort())")
+}
