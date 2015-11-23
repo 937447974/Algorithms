@@ -14,7 +14,7 @@ import Foundation
 let tree = YJRedBlackTree()
 // 测试数据
 var list = Array<YJRedBlackNode>()
-let count = 1000000
+let count = 10
 for var i in 1 ..< count {
     let node = YJRedBlackNode(key: Int(arc4random())%count)
     list.append(node)
@@ -34,8 +34,8 @@ for node in list {
     if let search = tree.search(node.key) {
         tree.delete(search)
     }
-//    print("=========\(node.key)")
-//    tree.inorderWalk()
+    print("=========\(node.key)")
+    tree.inorderWalk()
 }
 print("删除耗时:\(-date.timeIntervalSinceNow)")
 tree.inorderWalk()

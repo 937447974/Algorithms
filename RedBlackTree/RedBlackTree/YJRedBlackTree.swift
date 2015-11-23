@@ -196,7 +196,7 @@ class YJRedBlackTree {
     /// - returns: void
     func delete(z: YJRedBlackNode) {
         // 原理：尽量让将z调整到红色叶节点上，删除
-        var x: YJRedBlackNode? // 需要调整的点
+        var x: YJRedBlackNode! // 需要调整的点
         var yColor = z.color   // 删除的点的颜色
         if z.left == self.sentinel { // 1 如果z没有左孩子，则用其右孩子代替z
             x = z.right
@@ -223,7 +223,9 @@ class YJRedBlackTree {
         }
         // 删除为黑结点时，破坏了红黑性质，需要使用deleteFixup维护红黑性质
         if yColor == YJNodeColor.Black {
-            self.deleteFixup(x!)
+            if x != self.sentinel {
+                self.deleteFixup(x)
+            }
         }
     }
     
