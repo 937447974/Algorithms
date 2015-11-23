@@ -11,22 +11,31 @@
 
 import Foundation
 
-print("Hello, World!")
-
 let tree = YJRedBlackTree()
-// 插入
-for var i in 1 ..< 10 {
-    let node = YJRedBlackNode(key: i)
-//    let node = YJRedBlackNode(key: 10-i)
-    tree.insert(node)
+// 测试数据
+var list = Array<YJRedBlackNode>()
+let count = 1000000
+for var i in 1 ..< count {
+    let node = YJRedBlackNode(key: Int(arc4random())%count)
+    list.append(node)
 }
 
+// 插入测试
+var date = NSDate()
+for node in list {
+    tree.insert(node)
+}
+print("插入耗时:\(-date.timeIntervalSinceNow)")
+//tree.inorderWalk()
 
-tree.inorderWalk()
-
-print("========")
-
-var search = tree.search(5)
-tree.delete(search!)
-
+// 删除测试
+date = NSDate()
+for node in list {
+    if let search = tree.search(node.key) {
+        tree.delete(search)
+    }
+//    print("=========\(node.key)")
+//    tree.inorderWalk()
+}
+print("删除耗时:\(-date.timeIntervalSinceNow)")
 tree.inorderWalk()

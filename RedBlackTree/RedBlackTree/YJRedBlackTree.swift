@@ -36,7 +36,7 @@ class YJRedBlackTree {
     private func inorderWalk(node: YJRedBlackNode, height: Int) {
         if node != self.sentinel {
             // 中序遍历
-//            print("\(node!.key); color:\(node!.color) ; height:\(height)") // 测试
+//            print("\(node.key); color:\(node.color) ; height:\(height)") // 测试
             self.inorderWalk(node.left, height: height+1)
             print(node.key)
             self.inorderWalk(node.right, height: height+1)
@@ -114,7 +114,7 @@ class YJRedBlackTree {
         var y: YJRedBlackNode?
         // 设置z.parent
         var x = self.root
-        while x != self.sentinel {
+        while x != nil && x != self.sentinel {
             y = x
             if z.key < x!.key {
                 x = x!.left
@@ -198,10 +198,10 @@ class YJRedBlackTree {
         // 原理：尽量让将z调整到红色叶节点上，删除
         var x: YJRedBlackNode? // 需要调整的点
         var yColor = z.color   // 删除的点的颜色
-        if z.left == nil { // 1 如果z没有左孩子，则用其右孩子代替z
+        if z.left == self.sentinel { // 1 如果z没有左孩子，则用其右孩子代替z
             x = z.right
             self.transplant(z, v: z.right)
-        } else if z.right == nil { // 2 如果z没有右孩子，则用其左孩子代替z
+        } else if z.right == self.sentinel { // 2 如果z没有右孩子，则用其左孩子代替z
             x = z.left
             self.transplant(z, v: z.left)
         } else { // 3 z即有左孩子又有右孩子，则用z的后继y替换它
@@ -223,23 +223,7 @@ class YJRedBlackTree {
         }
         // 删除为黑结点时，破坏了红黑性质，需要使用deleteFixup维护红黑性质
         if yColor == YJNodeColor.Black {
-            if x == nil { // 删除的叶子黑结点
-                if z == z.parent?.left { // z为左孩子
-                    let w = z.parent!.right!
-                    w.color = z.parent!.color
-                    z.parent!.color = YJNodeColor.Black
-                    w.right!.color = YJNodeColor.Black
-                    self.leftRotate(w.parent!)
-                } else { // z为右孩子
-                    let w = z.parent!.left!
-                    w.color = z.parent!.color
-                    z.parent?.color = YJNodeColor.Black
-                    self.leftRotate(z.parent!)
-                }
-            } else {
-                self.deleteFixup(x!)
-            }
-            
+            self.deleteFixup(x!)
         }
     }
     
@@ -259,7 +243,7 @@ class YJRedBlackTree {
     
     // MARK: 根据结点获取其最小结点
     private func minimum(var node:YJRedBlackNode) -> YJRedBlackNode {
-        while node.left != nil {
+        while node != self.sentinel && node.left != self.sentinel {
             node = node.left!
         }
         return node
