@@ -64,7 +64,8 @@ class YJRedBlackTree {
     
     // MARK: - 左旋
     private func leftRotate(x:YJRedBlackNode) {
-        if let y = x.right { // x的右结点存在时执行左旋操作
+        let y = x.right
+        if x != self.sentinel && y != self.sentinel { // x和y都不是哨兵，执行左旋操作
             // 连接x和y.left
             x.right = y.left
             y.left?.parent = x
@@ -85,7 +86,8 @@ class YJRedBlackTree {
     
     // MARK: 右旋
     private func rightRotate(y:YJRedBlackNode) {
-        if let x = y.left { // y的左结点x存在时执行右旋操作
+        let x = y.left
+        if x != self.sentinel && y != self.sentinel { // x和y都不是哨兵，执行左旋操作
             // 连接y和x.right
             y.left = x.right
             x.right?.parent = y
@@ -208,6 +210,7 @@ class YJRedBlackTree {
             let y = self.minimum(z.right!) // 后驱
             yColor = y.color
             x = y.right
+            x.parent = y // 如果x为哨兵，需要临时设置其父结点
             //4 如果y是z的右孩子,用y替换z，并仅留下y的右孩子
             if y.parent != z{
                 //5 否则，y位于z的右子树中但不是z的右孩子，在这种情况先用y的右孩子替换y。再用y替换z。
@@ -223,9 +226,7 @@ class YJRedBlackTree {
         }
         // 删除为黑结点时，破坏了红黑性质，需要使用deleteFixup维护红黑性质
         if yColor == YJNodeColor.Black {
-            if x != self.sentinel {
-                self.deleteFixup(x)
-            }
+            self.deleteFixup(x)
         }
     }
     
