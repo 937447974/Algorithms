@@ -153,8 +153,8 @@ class YJBTree {
                 return count
             }
             // 中间
-            for i in 0 ..< node.key.count-1 {
-                if (node.key[i] <= key && key <= node.key[i+1]) {
+            for i in 1 ..< node.key.count {
+                if (node.key[i-1] <= key && key <= node.key[i]) {
                     return i;
                 }
             }

@@ -13,8 +13,23 @@ import Foundation
 
 let tree: YJBTree = YJBTree(t: 3)
 
-print("插入======")
-for i in 0...20 {
-    tree.insert(i)
-    print("总数：\(tree.count), \(tree.sort())")
+var list = Array<Int>()
+let count = 20
+for var i in 1 ..< count {
+    list.append(Int(arc4random())%count)
 }
+
+print("插入测试======")
+for value in list {
+    tree.insert(value)
+    print("插入\(value) => \(tree.sort())")
+}
+
+//tree.delete(8)
+//print(tree.sort())
+//
+//print("\n删除测试======")
+//for i in 0...20 {
+//    tree.delete(i)
+//    print("删除\(i) => \(tree.sort())")
+//}
