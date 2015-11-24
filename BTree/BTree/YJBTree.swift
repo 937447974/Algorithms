@@ -54,11 +54,11 @@ class YJBTree {
     }
     
     // MARK: - 根据key搜索所在的树以及位置
-    func search(key: Int) ->(node: YJBTreeNode, keyLocation: Int)? {
+    func search(key: Int) -> (node: YJBTreeNode, keyLocation: Int)? {
         return self.search(self.root, key: key)
     }
     
-    private func search(node: YJBTreeNode, key :Int) ->(node: YJBTreeNode, keyLocation: Int)? {
+    private func search(node: YJBTreeNode, key :Int) -> (node: YJBTreeNode, keyLocation: Int)? {
         var i:Int = 0
         while (i < node.key.count && key > node.key[i]) {
             i++
@@ -81,12 +81,12 @@ class YJBTree {
     /// - returns: void
     func insert(key: Int) {
         /**
-         插入三情况
-         1:根结点也为叶子结点，执行情况2。
-         2:插入叶子结点，直接插入，叶子满时，分裂并向上抛数。
-         3:插入内部节点，向下传递找到要插入的叶子结点执行情况2;
-         遇到向上抛的数据后，重新排列节点。如果节点满，分裂节点继续向上抛
-         */
+        插入key的具体思想如下。
+        1. 根结点为叶子结点执行步骤2，为内部结点执行步骤3。
+        2. 插入叶子结点，直接插入，叶子满时，分裂并向上抛数。
+        3. 插入内部结点，向下传递找到要插入的叶子结点执行步骤2。
+        4. 回调时，遇到向上抛的数据后，重新排列结点。如果结点满，分裂结点继续向上抛。
+        */
         // 情况1:树高为1，直接添加叶子结点
         if root.h == 1 {
             root = self.insertLeaf(self.root, key: key)
@@ -118,7 +118,7 @@ class YJBTree {
                 // 替换并插入child
                 node.child[index] = child.child[1]
                 node.child.insert(child.child[0], atIndex: index)
-                // 如果节点满，分裂节点继续向上抛
+                // 如果结点满，分裂结点继续向上抛
                 if node.key.count >= 2 * t - 1{
                     return self.splitChild(node)
                 }
@@ -139,7 +139,7 @@ class YJBTree {
     }
     
     // MARK: 插入辅助方法，寻找要插入的位置
-    private func insertIndex(node: YJBTreeNode, key :Int) ->Int {
+    private func insertIndex(node: YJBTreeNode, key :Int) -> Int {
         // key的个数
         let count = node.key.count
         // 有数据
@@ -171,7 +171,7 @@ class YJBTree {
     
     private func delete(node: YJBTreeNode, key: Int) -> YJBTreeNode {
         /**删除思路：
-        1. 找到key，合并其左右子节点成新的B树B
+        1. 找到key，合并其左右子结点成新的B树B
         2. 判断B能否替代该key。能够替代，替换key、left、right；不能替换，替换left，删除key和right
         3. 嵌套回调时，遇到key.count==t-2时，做合并当前child对应的key和相邻的child；否则不执行任何操作。
         */
@@ -251,7 +251,7 @@ class YJBTree {
         if left.leaf { // 叶子结点
             left.key += right.key
         } else {
-            // 合并首位节点
+            // 合并首位结点
             let bTree = self.mergeChild(left.child.last!, right: right.child.first!)
             // 去掉左child尾，右child首
             left.child.removeLast()
