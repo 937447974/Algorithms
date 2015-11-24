@@ -29,6 +29,10 @@ for value in list {
 }
 print("插入耗时:\(-time.timeIntervalSinceNow)")
 
+print("\n查找 \(list.first!)")
+if let search = tree.search(list.first!) {
+    print(search.node.key[search.keyLocation])
+}
 
 print("\n删除 begin")
 time = NSDate()
