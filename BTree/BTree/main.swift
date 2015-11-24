@@ -11,25 +11,29 @@
 
 import Foundation
 
-let tree: YJBTree = YJBTree(t: 3)
-
+// 测试数据
 var list = Array<Int>()
-let count = 20
+let count = 100000
 for var i in 1 ..< count {
-    list.append(Int(arc4random())%count)
+     list.append(Int(arc4random())%count)
+//    list.append(i)
 }
 
-print("插入测试======")
+
+let tree: YJBTree = YJBTree(t: 10)
+print("插入 begin")
+var time = NSDate()
 for value in list {
     tree.insert(value)
-    print("插入\(value) => \(tree.sort())")
+    //print("插入\(value)\n\t\t\(tree.sort())")
 }
+print("插入耗时:\(-time.timeIntervalSinceNow)")
 
-//tree.delete(8)
-//print(tree.sort())
-//
-//print("\n删除测试======")
-//for i in 0...20 {
-//    tree.delete(i)
-//    print("删除\(i) => \(tree.sort())")
-//}
+
+print("\n删除 begin")
+time = NSDate()
+for value in list {
+    tree.delete(value)
+    //print("删除\(value)\n\t\t\(tree.sort())")
+}
+print("删除耗时:\(-time.timeIntervalSinceNow)")

@@ -18,8 +18,6 @@ class YJBTree {
     private var root: YJBTreeNode
     /// 度数,除根结点的其他结点最少t-1，最多2t-2个子结点，默认t最小为3
     private let t: Int
-    /// b树中包含的元素
-    var count = 0
 
     // MARK: - 初始化B树
     /// 初始化B树
@@ -98,7 +96,6 @@ class YJBTree {
                 self.root = root
             }
         }
-        self.count++
     }
     
     // MARK: node中插入数据key
@@ -161,8 +158,122 @@ class YJBTree {
         }
         return 0
     }
+
+    // MARK: - 删除key
+    func delete(key: Int) {
+        if self.root.key.count == 0 { // 树为空时，直接返回
+            return
+        }
+        // 根据返回的结点判断是否需要降key操作
+        let newRoot = self.delete(self.root, key: key)
+        self.root = newRoot.key.count != 0 || newRoot.leaf ? newRoot : newRoot.child.first!
+    }
     
-    // MARK: 插入时分割子结点
+    private func delete(node: YJBTreeNode, key: Int) -> YJBTreeNode {
+        /**删除思路：
+        1. 找到key，合并其左右子节点成新的B树B
+        2. 判断B能否替代该key。能够替代，替换key、left、right；不能替换，替换left，删除key和right
+        3. 嵌套回调时，遇到key.count==t-2时，做合并当前child对应的key和相邻的child；否则不执行任何操作。
+        */
+        if node.leaf { // 叶子结点
+            for (index, value) in node.key.enumerate() {
+                if value == key { // 找到则删除
+                    node.key.removeAtIndex(index)
+                    break
+                }
+            }
+        } else { // 内部结点
+            // 嵌套向下
+            var index = -1
+            let count = node.key.count
+            // 寻找key或child
+            if key > node.key.last! { // 这里用到了快速跳跃，先判断是否跳过
+                index = count
+            } else {
+                for i in 0..<count {
+                    if node.key[i] == key { // 找到key
+                        let bTree = self.mergeChild(node.child[i], right: node.child[i+1])
+                        // 先删除后插入
+                        self.replaceNode(node, index: i, bTree: bTree)
+                        break
+                    } else if key < node.key[i] { // 找到child
+                        index = i
+                        break
+                    }
+                }
+            }
+            // 嵌套返回
+            if index != -1 {
+                var bTree = self.delete(node.child[index], key: key)
+                if bTree.key.count == self.t-2 { // 降key操作
+                    let keyIndex = index == count ? index-1 : index
+                    bTree = self.mergeKeyChild(node.child[keyIndex], key: node.key[keyIndex], right: node.child[keyIndex+1])
+                    self.replaceNode(node, index: keyIndex, bTree: bTree)
+                }
+            }
+        }
+        return node
+    }
+    
+    // MARK: B树替换结点中right、key、left
+    private func replaceNode(var node: YJBTreeNode, index: Int, bTree:YJBTreeNode) {
+        if node.h == bTree.h { // 树高相同，替换key、left、right
+            node.key[index] = bTree.key[0]
+            node.child[index] = bTree.child[0]
+            node.child[index+1] = bTree.child[1]
+        } else { // 树高不同，替换left，删除key和right
+            node.key.removeAtIndex(index)
+            node.child[index] = bTree
+            node.child.removeAtIndex(index+1)
+        }
+        // 是否需要合并
+        if node.key.count >= 2 * t - 1{
+            node = self.splitChild(node)
+        }
+    }
+    
+    // MARK: 合并左孩子、key、右孩子
+    private func mergeKeyChild(left: YJBTreeNode, key:Int, right: YJBTreeNode) -> YJBTreeNode {
+        // key
+        left.key.append(key)
+        left.key += right.key
+        // child
+        left.child += right.child
+        // 是否需要合并
+        if left.key.count >= 2 * t - 1{
+            return self.splitChild(left)
+        }
+        return left
+    }
+    
+    // MARK: 合并左右子结点
+    private func mergeChild(left: YJBTreeNode, right: YJBTreeNode) -> YJBTreeNode {
+        if left.leaf { // 叶子结点
+            left.key += right.key
+        } else {
+            // 合并首位节点
+            let bTree = self.mergeChild(left.child.last!, right: right.child.first!)
+            // 去掉左child尾，右child首
+            left.child.removeLast()
+            right.child.removeAtIndex(0)
+            if bTree.h == left.h { // 树高不变时，连key、child
+                left.key.append(bTree.key[0])
+                left.child += bTree.child
+            } else { // 树高变时，新生成的树是当前结点的child
+                left.child.append(bTree)
+            }
+            // 连接right.child
+            left.key += right.key
+            left.child += right.child
+        }
+        // 是否需要合并
+        if left.key.count >= 2 * t - 1{
+            return self.splitChild(left)
+        }
+        return left
+    }
+    
+    // MARK: - 分裂结点成为一棵B树
     private func splitChild(node: YJBTreeNode) -> YJBTreeNode {
         // 分割点
         let split = node.key.count / 2
@@ -202,7 +313,5 @@ class YJBTree {
         // 返回的r为一棵B树
         return r
     }
-    
-    
-    
+
 }
