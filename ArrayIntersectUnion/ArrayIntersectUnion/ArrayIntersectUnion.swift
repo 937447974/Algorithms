@@ -21,15 +21,13 @@ class ArrayIntersectUnion {
     func intersect(array1: Array<String>, _ array2: Array<String>) -> Array<String> {
         var list = Array<String>()
         var set = Set<String>()
+        // 存入数据
         for item in array1 {
-            if !set.contains(item) {
-               set.insert(item)
-                list.append(item)
-            }
+            set.insert(item)
         }
+        // 判断是否共同数据
         for item in array2 {
-            if !set.contains(item) {
-                set.insert(item)
+            if set.contains(item) {
                 list.append(item)
             }
         }
@@ -46,13 +44,17 @@ class ArrayIntersectUnion {
     func union(array1: Array<String>, _ array2: Array<String>) -> Array<String> {
         var list = Array<String>()
         var set = Set<String>()
-        // 存入数据
+        // 添加数组1
         for item in array1 {
-            set.insert(item)
+            if !set.contains(item) { // 已添加数据，不在重复添加
+                set.insert(item)
+                list.append(item)
+            }
         }
-        // 判断是否共同数据
+        // 添加数组2
         for item in array2 {
-            if set.contains(item) {
+            if !set.contains(item) {
+                set.insert(item)
                 list.append(item)
             }
         }
