@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D414F6CF1C0547B8001ACD36 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414F6CE1C0547B8001ACD36 /* main.swift */; };
 		D414F6D81C0578A0001ACD36 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414F6D71C0578A0001ACD36 /* StringExtension.swift */; };
+		D414F6DC1C05B4B7001ACD36 /* StringMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D414F6DB1C05B4B7001ACD36 /* StringMatcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,9 @@
 		D414F6CB1C0547B8001ACD36 /* StringMatcher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = StringMatcher; sourceTree = BUILT_PRODUCTS_DIR; };
 		D414F6CE1C0547B8001ACD36 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D414F6D71C0578A0001ACD36 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		D414F6D91C05B4B7001ACD36 /* StringMatcher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StringMatcher-Bridging-Header.h"; sourceTree = "<group>"; };
+		D414F6DA1C05B4B7001ACD36 /* StringMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringMatcher.h; sourceTree = "<group>"; };
+		D414F6DB1C05B4B7001ACD36 /* StringMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringMatcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,9 @@
 			children = (
 				D414F6CE1C0547B8001ACD36 /* main.swift */,
 				D414F6D71C0578A0001ACD36 /* StringExtension.swift */,
+				D414F6DA1C05B4B7001ACD36 /* StringMatcher.h */,
+				D414F6DB1C05B4B7001ACD36 /* StringMatcher.m */,
+				D414F6D91C05B4B7001ACD36 /* StringMatcher-Bridging-Header.h */,
 			);
 			path = StringMatcher;
 			sourceTree = "<group>";
@@ -122,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D414F6DC1C05B4B7001ACD36 /* StringMatcher.m in Sources */,
 				D414F6CF1C0547B8001ACD36 /* main.swift in Sources */,
 				D414F6D81C0578A0001ACD36 /* StringExtension.swift in Sources */,
 			);
@@ -213,14 +221,21 @@
 		D414F6D31C0547B8001ACD36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StringMatcher/StringMatcher-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		D414F6D41C0547B8001ACD36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StringMatcher/StringMatcher-Bridging-Header.h";
 			};
 			name = Release;
 		};
