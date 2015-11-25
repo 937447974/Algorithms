@@ -116,7 +116,7 @@ extension String {
                 // i移动到末尾的下一位字符，j归零
                 i = i.advancedBy(aSLength).advancedBy(-aString.startIndex.distanceTo(j))
                 j = aString.startIndex
-//                 下一位字符在aString存在时要调整i的位置
+                // 下一位字符在aString存在时要调整i的位置
                 if i < self.endIndex {
                     let c = self[i]
                     if let ni = sDict[c] {
@@ -137,6 +137,7 @@ extension String {
     private func getSundayDict(aString: String) -> [Character:Int] {
         var dict = [Character:Int]()
         var location = 0
+        // 存储字符最后一次出现的位置
         for i in aString.startIndex..<aString.endIndex {
             dict[aString[i]] = location
             location++
