@@ -37,3 +37,7 @@ QQ：937447974
 ##7 BTree
 
 B树
+
+##8 StringMatcher
+
+字符串匹配，使用了暴力破解法、KMP、BM和Sunday算法。
