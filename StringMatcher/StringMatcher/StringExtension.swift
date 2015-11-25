@@ -20,16 +20,12 @@ extension String {
     ///
     /// - returns: Range?
     func violentRangeOfString(aString: String) -> Range<Index>? {
-        // 预先读取，防止频繁读取
-        let sLIndex = self.endIndex
-        let pLIndex = aString.endIndex
-        // s<p时返回nil
-        if sLIndex < pLIndex {
+        if self.endIndex < aString.endIndex { // s<p时返回nil
             return nil
         }
         var i = self.startIndex
         var j = aString.startIndex
-        while i < sLIndex && j < pLIndex {
+        while i < self.endIndex && j < aString.endIndex {
             //①如果当前字符匹配成功（即self[i] == aString[j]），则i++，j++
             if self[i] == aString[j] {
                 i++
@@ -41,7 +37,7 @@ extension String {
             
         }
         //匹配成功，返回模式串aString在当前文本串中的位置，否则返回nil
-        if j == pLIndex {
+        if j == aString.endIndex {
             // i - j
             let start = i.advancedBy(-aString.startIndex.distanceTo(j))
             return start ..< i
@@ -56,7 +52,44 @@ extension String {
     ///
     /// - returns: Range?
     func kmpRangeOfString(aString: String) -> Range<Index>? {
+        if self.endIndex < aString.endIndex { // s<p时返回nil
+            return nil
+        }
+        let m = startIndex.distanceTo(aString.endIndex) // 要匹配的字符串长度
+        let prefixList = self.computePrefixFunction(aString) // 获取前缀
+        var q = -1
+        for i in self.startIndex ..< self.endIndex {
+            while q > -1 && self[i] != aString[startIndex.advancedBy(q+1)] { // 匹配失败，快速移动
+                q = prefixList[q]
+            }
+            if self[i] == aString[startIndex.advancedBy(q+1)] { // 匹配成功
+                q++
+            }
+            if q == m-1 { // 已找到
+                return i.advancedBy(1-m)..<i.advancedBy(1)
+            }
+        }
         return nil
+    }
+    
+    // MARK: 计算前缀
+    private func computePrefixFunction(aString: String) -> Array<Int> {
+        let start = aString.startIndex
+        let length = start.distanceTo(aString.endIndex)
+        var list = Array(count: length, repeatedValue: -1)
+        var k = -1
+        for q in 1..<length {
+            // 遇到上一个前缀匹配成功时，要接着匹配
+            while k > -1 && aString[start.advancedBy(k+1)] != aString[start.advancedBy(q)] {
+                k = list[k]
+            }
+            // 匹配前缀和后缀首位
+            if aString[start.advancedBy(k+1)] == aString[start.advancedBy(q)] {
+                k++
+            }
+            list[q] = k
+        }
+        return list
     }
 
 }
